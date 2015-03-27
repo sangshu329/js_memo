@@ -130,3 +130,52 @@ $nav.find("a").hover(function(){
 })();
 
 });
+
+// cookie访问
+    function getCookie(Name){
+        var re=new RegExp(Name+"=[^;]+", "i"); //construct RE to search for target name/value pair
+        if (document.cookie.match(re)) //if cookie found
+            return document.cookie.match(re)[0].split("=")[1] //return its value
+        return ""
+    }
+    function setCookie(name, value){
+        document.cookie = name+"="+value+";path=/" //cookie value is domain wide (path=/)
+    }
+    function clearCookie(name) {
+        setCookie(name, "", -1);
+    }
+	
+	
+//设置cookie
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+//获取cookie
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+//清除cookie  
+function clearCookie(name) {  
+    setCookie(name, "", -1);  
+}  
+function checkCookie() {
+    var user = getCookie("username");
+    if (user != "") {
+        alert("Welcome again " + user);
+    } else {
+        user = prompt("Please enter your name:", "");
+        if (user != "" && user != null) {
+            setCookie("username", user, 365);
+        }
+    }
+}

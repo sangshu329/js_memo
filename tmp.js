@@ -86,10 +86,6 @@
   };
 
 
-
-
-
-
 var timerFID;
 
 function nextPage() {
